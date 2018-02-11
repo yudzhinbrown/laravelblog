@@ -31,3 +31,4 @@
 <div class="col-sm-4 offset-sm-2">
     <button type="submit" class="btn btn-primary">Сохранить</button>
 </div>
+<div id="response"></div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Requests\CategoryFormRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,20 +21,17 @@ class CategoryController extends Controller
         return response()->json(['slug' => $slug]);
     }
 
-    public function checkSlog(Request $request)
+    public function checkSlog(CategoryFormRequest $request)
     {
+        $messages = $request->messages();
+        return response()->json();
 
-        $request->validate([
-            'title' => '',
-            'slug' => 'required|unique:categories',
-        ]);
-        $error_messages = null;
-
+//        $error_messages = null;
 //        if (!Category::checkUniqueSlug($request->input('slug')))
 //            $error_messages[] = 'Слог с данным именем уже существует';
-
-
-        return response()->json();
+//
+//
+//        return response()->json(['$error_messages' => $error_messages]);
 
     }
     /**
@@ -62,16 +60,11 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param CategoryFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryFormRequest $request)
     {
-
-        $request->validate([
-            'title' => 'required',
-            'slug' => 'required|unique:categories',
-        ]);
 
         Category::create($request->all());
         return redirect()->route('admin.category.index');

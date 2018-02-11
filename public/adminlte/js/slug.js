@@ -1,5 +1,6 @@
 $(function () {
 
+
     //Slog Generation
     $("#slug-btn").click(function (e) {
         e.preventDefault();
@@ -8,7 +9,7 @@ $(function () {
         var title = $("input[name='title']").val();
 
         $.ajax({
-            url: "general-slug",
+            url: "/admin/category/general-slug",
             type: "POST",
             data: {_token: _token, title: title},
             success: function (data) {
@@ -20,24 +21,25 @@ $(function () {
     //Slog verification
     $("input[name='slug']").focusout(function () {
 
-
         var _token = $("input[name='_token']").val();
         var slug = $("input[name='slug']").val();
         var title =$("input[name='title']").val();
 
         $.ajax({
-            url: "check-slug",
-            type: "POST",
-            dataType: 'json',
-            data: {_token: _token, slug: slug, title: title},
-
-
-            success: function(data){
-            },
-            error: function (data) {
-                var errors = data.responseJSON;
-                console.log(errors);
-            }
+            // url: "check-slug",
+            // type: "POST",
+            // dataType: 'json',
+            // data: {_token: _token, slug: slug, title: title},
+            // success: function(data){
+            // },
+            // error: function(data)
+            // {
+            //     var errors = '';
+            //     for(datos in data.responseJSON){
+            //         errors += data.responseJSON[datos] + '<br>';
+            //     }
+            //     $('#response').show().html(errors);
+            // }
 
 
 
@@ -48,7 +50,6 @@ $(function () {
             //             slug.addClass("is-invalid");
             //             $.each(data.error_messages, function (i, item) {
             //                 slug.next().after("<div class=\"invalid-feedback\">" + item + "</div>");
-            //                 console.log(item);
             //             });
             //         }
             //     } else {
