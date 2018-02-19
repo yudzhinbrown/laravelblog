@@ -15,7 +15,7 @@
                                 <thead>
                                 <tr>
                                     <th>Найменование</th>
-                                    <th>Приставка</th>
+                                    <th>Слог</th>
                                     <th class="text-center">Публикация</th>
                                     <th class="text-center">Изменить</th>
                                     <th class="text-center">Удалить</th>
@@ -24,7 +24,6 @@
                                 <tbody>
                                 @forelse($tags as $tag)
                                     <tr>
-                                        <td>{{ $tag->id }}</td>
                                         <td>{{ $tag->title }}</td>
                                         <td>{{ $tag->slug }}</td>
                                         <td class="text-center">
@@ -38,16 +37,20 @@
                                         <td class="text-center">
                                             <form action="{{ route('admin.tag.destroy', $tag)}}" method="post">
                                                 {{ csrf_field() }}
-                                                <input type="hidden" name="_method" value="DELETE">
+                                                {{ method_field('DELETE') }}
                                                 <button class="btn-delete" type="submit"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
-                                    @empty
-                                    <tr><td><h4>Таблица тэгов пустая!!!</h4></td></tr>
+                                @empty
+                                    <tr>
+                                        <td><h4>Таблица с категориями пуста</h4></td>
+                                    </tr>
+
                                 @endforelse
                                 </tbody>
                             </table>
+                            {{ $tags->links() }}
                         </div>
                     </div>
                 </div>

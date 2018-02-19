@@ -7,13 +7,13 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <h4>All form elements</h4>
+                            <h4>Изменение тэга</h4>
                         </div>
                         <div class="card-body">
                             <form class="form-horizontal" method="post" action="{{ route('admin.tag.update', $tag) }}">
-                                <input type="hidden" name="_method" value="put">
+                                {{ method_field('PUT') }}
                                 {{ csrf_field() }}
-                                @include('admin.tags.form')
+                                @include('admin.tags.pantials.form')
                             </form>
                         </div>
                     </div>

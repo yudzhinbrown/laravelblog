@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\TagFormRequest;
 use App\Tag;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class TagController extends Controller
@@ -16,7 +16,7 @@ class TagController extends Controller
     public function index()
     {
         return view('admin.tags.index', [
-            'tags' => Tag::paginate(10)
+            'tags' => Tag::orderBy('id', 'desc')->paginate(10)
         ]);
     }
 
@@ -33,13 +33,12 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param TagFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagFormRequest $request)
     {
-        $slug = ['slug' => ''];
-        Tag::create($request->all() + $slug);
+        Tag::create($request->all());
         return redirect()->route('admin.tag.index');
     }
 
@@ -69,11 +68,11 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tag  $tag
+     * @param TagFormRequest $request
+     * @param  \App\Tag $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(TagFormRequest $request, Tag $tag)
     {
         $slug = ['slug' => ''];
         $tag->update($request->all() + $slug);
@@ -83,11 +82,13 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
+     * @param  \App\Tag $tag
+     * @return void
+     * @throws \Exception
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->route('admin.tag.index');
     }
 }

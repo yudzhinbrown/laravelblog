@@ -37,7 +37,7 @@
                                         <td class="text-center">
                                             <form action="{{ route('admin.category.destroy', $category)}}" method="post">
                                                 {{ csrf_field() }}
-                                                <input type="hidden" name="_method" value="DELETE">
+                                                {{ method_field('DELETE') }}
                                                 <button class="btn-delete" type="submit"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
@@ -50,6 +50,7 @@
                                 @endforelse
                                 </tbody>
                             </table>
+                            {{ $categories->links() }}
                         </div>
                     </div>
                 </div>

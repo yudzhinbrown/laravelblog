@@ -7,13 +7,13 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <h4>Изменить Категорию</h4>
+                            <h4>Изменение категории</h4>
                         </div>
                         <div class="card-body">
                             <form class="form-horizontal" method="post" action="{{ route('admin.category.update', $category) }}">
-                                <input type="hidden" name="_method" value="put">
+                                {{ method_field('PUT') }}
                                 {{ csrf_field() }}
-                                @include('admin.categories.form')
+                                @include('admin.categories.pantials.form')
                             </form>
                         </div>
                     </div>

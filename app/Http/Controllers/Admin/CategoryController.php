@@ -3,37 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
-use App\Http\Requests\CategoryFormRequest;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Validator;
-use Illuminate\Support\Str;
+use App\Http\Requests\Admin\CategoryFormRequest;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
 
-
-
-    public function generalSlug(Request $request){
-       $slug = Str::slug(mb_substr($request->input('title'), 0, 40). '-' . Carbon::now()->timestamp , '-');
-
-        return response()->json(['slug' => $slug]);
-    }
-
-    public function checkSlog(CategoryFormRequest $request)
-    {
-        $messages = $request->messages();
-        return response()->json();
-
-//        $error_messages = null;
-//        if (!Category::checkUniqueSlug($request->input('slug')))
-//            $error_messages[] = 'Слог с данным именем уже существует';
-//
-//
-//        return response()->json(['$error_messages' => $error_messages]);
-
-    }
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.categories.index', [
-            'categories' => Category::paginate(10)
+            'categories' => Category::orderBy('id', 'desc')->paginate(10)
         ]);
     }
 
@@ -63,8 +39,12 @@ class CategoryController extends Controller
      * @param CategoryFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryFormRequest $request)
+    public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required|unique:categories'
+        ]);
 
         Category::create($request->all());
         return redirect()->route('admin.category.index');
@@ -73,7 +53,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Category $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
@@ -84,7 +64,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -95,21 +75,26 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  CategoryFormRequest $request
+     * @param  \App\Category $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
     {
+        $this->validate($request, [
+            'slug' => "unique:categories,slug,{$category->slug},slug"
+        ]);
         $category->update($request->all());
+
         return redirect()->route('admin.category.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Category $category
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Category $category)
     {

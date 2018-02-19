@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
 
-    @include('admin.shared.styles')
+    @include('admin.layouts.shared.styles')
 </head>
 <body>
 
 <!-- Side Navbar -->
-@include('admin.shared.navbar')
+@include('admin.layouts.shared.navbar')
 <div class="page">
 
     <!-- Header -->
-    @include('admin.shared.header')
+    @include('admin.layouts.shared.header')
     <!--Content-->
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -32,9 +32,9 @@
     @endif
     @yield('content')
     <!--Footer-->
-    @include('admin.shared.footer')
+    @include('admin.layouts.shared.footer')
 </div>
     <!--Script-->
-@include('admin.shared.scripts')
+@include('admin.layouts.shared.scripts')
 </body>
 </html>

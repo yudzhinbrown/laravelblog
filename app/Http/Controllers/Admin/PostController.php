@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.posts.index', [
+            'posts' => Post::orderBy('created_at', 'desc')->paginate(10)
+        ]);
     }
 
     /**
@@ -25,7 +29,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create', [
+            'categories' => Category::where('published', 1)->get(),
+            'tags' => Tag::where('published', 1)->get()
+        ]);
     }
 
     /**
@@ -36,14 +43,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $post = Post::create($request->all());
+
+        if($request->input('tags')){
+            $post->tags()->attach($request->input('tags'));
+        }
+        return redirect()->route('admin.post.index');
+}
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return void
      */
     public function show(Post $post)
     {
@@ -53,34 +65,49 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', [
+            'post' => $post,
+            'categories' => Category::where('published', 1)->get(),
+            'tags' => Tag::where('published', 1)->get()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  \Illuminate\Http\Request $request
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->update($request->all());
+
+        //Tags
+        $post->tags()->detach();
+        if($request->input('tags')){
+            $post->tags()->attach($request->input('tags'));
+        }
+        return redirect()->route('admin.post.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return redirect
+     * @throws \Exception
      */
     public function destroy(Post $post)
     {
-        //
+        $post->tags()->detach();
+        $post->delete();
+
+        return redirect()->route('admin.post.index');
     }
 }

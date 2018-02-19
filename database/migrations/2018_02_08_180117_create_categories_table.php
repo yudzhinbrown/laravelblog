@@ -17,10 +17,8 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('slug')->unique();
-            $table->integer('parent_id')->nullable();
             $table->boolean('published')->nullable();
-            $table->integer('created_by')->nullable();
-            $table->integer('modified_by')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

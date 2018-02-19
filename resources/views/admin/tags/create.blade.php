@@ -1,6 +1,6 @@
 @extends('admin.layouts.app_admin')
 
-@extends('admin.layouts.app_admin')
+
 
 @section('content')
     <section class="forms">
@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <form class="form-horizontal" method="post" action="{{ route('admin.tag.store') }}">
                                 {{ csrf_field() }}
-                                @include('admin.tags.form')
+                                @include('admin.tags.pantials.form')
                             </form>
                         </div>
                     </div>
@@ -23,3 +23,4 @@
         </div>
     </section>
 @endsection
+

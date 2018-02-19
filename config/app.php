@@ -160,6 +160,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //laravel-ckeditor
+        Unisharp\Ckeditor\ServiceProvider::class,
+
+        //blog
+
+        App\Providers\BlogServiceProvider::class
     ],
 
     /*

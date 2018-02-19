@@ -11,19 +11,29 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::group(['namespace' => 'Blog'], function (){
+    Route::get('/', 'BlogController@index');
+    Route::get('/category_{slug}', 'BlogController@category');
+    Route::get('/category_{category_slug}/post_{post_slug}', 'BlogController@post')->name('post');
 });
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 //admin-panel
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function (){
     Route::get('/', 'DashboardController@dashboard')->name('admin.index');
-    Route::post('/category/general-slug', 'CategoryController@generalSlug', ['as' => 'admin']);
-    Route::post('/category/check-slug', 'CategoryController@checkSlog', ['as' => 'admin']);
+    Route::post('/general_slug', 'SlugController@generalSlug');
     Route::resource('/category', 'CategoryController', ['as' => 'admin']);
     Route::resource('/tag', 'TagController', ['as' => 'admin']);
+    Route::resource('/post', 'PostController', ['as' => 'admin']);
+    Route::resource('/comment', 'CommentController', ['as' => 'admin']);
+
+
 });
+
+
+

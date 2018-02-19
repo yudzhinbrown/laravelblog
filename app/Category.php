@@ -6,14 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['title', 'slug', 'parent_id', 'published', 'created_by', 'modified_by'];
+    protected $fillable = ['title', 'slug', '', 'published', 'description'];
 
-     public static function checkUniqueSlug($slug)
-    {
-        if ((Category::where('slug', '=', $slug))->exists()) {
-            return false;
-        } else {
-            return true;
-        }
+    public function posts(){
+        return $this->hasMany('App\Post');
     }
+
 }
