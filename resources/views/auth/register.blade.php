@@ -1,13 +1,11 @@
-@extends('layouts.app')
+@extends('blog.layouts.app_blog')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card card-default">
-                <div class="card-header">Register</div>
-
-                <div class="card-body">
+<div class="col-md-8 content-main">
+    <div class="content-grid">
+        <div class="content-grid-info">
+            <div class="post-info">
+                <div class="content-form">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -19,8 +17,8 @@
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -33,8 +31,8 @@
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -47,8 +45,8 @@
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -70,6 +68,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

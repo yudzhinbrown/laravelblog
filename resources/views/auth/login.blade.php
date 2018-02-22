@@ -1,13 +1,12 @@
-@extends('layouts.app')
+@extends('blog.layouts.app_blog')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card card-default">
-                <div class="card-header">Login</div>
 
-                <div class="card-body">
+
+    <div class="col-md-8 content-main">
+        <div class="content-grid">
+            <div class="content-grid-info">
+                <div class="post-info">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -65,5 +64,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

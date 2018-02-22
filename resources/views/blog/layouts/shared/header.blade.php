@@ -2,7 +2,7 @@
 <div class="header">
     <div class="container">
         <div class="logo">
-            <a href="index.html"><img src="{{ asset('bloglte/images/logo.jpg') }}" title="" /></a>
+            <a href="{{ route('home') }}"><img src="{{ asset('bloglte/images/logo.jpg') }}" title="" /></a>
         </div>
         <!---start-top-nav---->
         <div class="top-menu">
@@ -14,9 +14,9 @@
             </div>
             <span class="menu"> </span>
             <ul>
-                <li class="active"><a href="index.html">HOME</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="contact.html">CONTACT</a></li>
+                <li class="active"><a href="{{ route('home') }}">Главная</a></li>
+                <li><a href="{{ route('about') }}">О проекте</a></li>
+                <li><a href="{{ route('contact') }}">Контакты</a></li>
                 <div class="clearfix"> </div>
             </ul>
         </div>

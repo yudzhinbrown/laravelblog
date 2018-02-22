@@ -4,40 +4,58 @@
 @section('content')
 
 @section('content')
-    <div class="col-md-8 content-main">
+    <div class="col-md-10 ">
         <div class="content-grid">
-                <div class="content-grid-info">
-                    <div class="post-info">
-                        <h4><a href="#">{{ $post->title }}</a>{{ $post->getDate() }} || Автор : {{ $post->user() }}</h4>
-                        @isset($post->video)
-                            <iframe width="100%" height="350" src="https://www.youtube.com/embed/{{$post->video}}">
-                            </iframe>
-                        @endisset
-                        <p>{!! $post->description !!}</p>
-                        <div class="line"></div>
+            <div class="content-grid-info">
+                <div class="post-info">
+                    <h4>
+                        <a href="#">{{ $post->title }}</a>
+                        <p>{{ $post->getDate() }} || Автор : {{ $post->user() }}</p>
 
-                    </div>
+                    </h4>
+                    <p>
+                        @isset($post->tags->first()->id)
+                            Тэги:
+                            @foreach($post->tags as $tag)
+                                <span class="tag"><a href="{{ url("/tag_{$tag->slug}") }}">{{ $tag->title }}</a></span>
+                            @endforeach
+                            @else
+                        @endisset
+                    </p>
+                    @isset($post->video)
+                        <iframe width="100%" height="350" src="https://www.youtube.com/embed/{{$post->video}}">
+                        </iframe>
+                    @endisset
+                    <p>{!! $post->description !!}</p>
+                    <div class="line"></div>
                 </div>
+            </div>
+        </div>
+
+        @foreach($post->comments()->get() as $comment)
+            <ul class="comment-list">
+                <h5 class="post-author_head"> {{ $comment->user->name }}</h5>
+                <li><img src="images/avatar.png" class="img-responsive" alt="">
+                    <div class="desc">
+                        <p>{!! $comment->text !!}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
+        @endforeach
+
+        <div class="content-form">
+            <h3>Добавить комментарий</h3>
+            @guest()
+                <p>Добавлять комментарии могут только зарегистрированные пользователи </p>
+            @else
+                <form action="{{ route('comment.store') }}" method="post">
+                    {{ csrf_field() }}
+                    <textarea placeholder="Комментарий" name="text"></textarea>
+                    <input type="hidden" name="commentable_id" value="{{ $post->id }}">
+                    <input type="submit" value="Отправить">
+                </form>
+            @endguest
         </div>
     </div>
-
-        {{--<ul class="comment-list">--}}
-            {{--<h5 class="post-author_head">Written by <a href="#" title="Posts by admin" rel="author">admin</a></h5>--}}
-            {{--<li><img src="images/avatar.png" class="img-responsive" alt="">--}}
-                {{--<div class="desc">--}}
-                    {{--<p>View all posts by: <a href="#" title="Posts by admin" rel="author">admin</a></p>--}}
-                {{--</div>--}}
-                {{--<div class="clearfix"></div>--}}
-            {{--</li>--}}
-        {{--</ul>--}}
-        {{--<div class="content-form">--}}
-            {{--<h3>Leave a comment</h3>--}}
-            {{--<form>--}}
-                {{--<input type="text" placeholder="Name" required="">--}}
-                {{--<input type="text" placeholder="Email" required="">--}}
-                {{--<input type="text" placeholder="Phone" required="">--}}
-                {{--<textarea placeholder="Message"></textarea>--}}
-                {{--<input type="submit" value="SEND">--}}
-            {{--</form>--}}
-        {{--</div>--}}
 @endsection

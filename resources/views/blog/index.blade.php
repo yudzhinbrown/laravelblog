@@ -1,7 +1,7 @@
 @extends('blog.layouts.app_blog')
 
 @section('content')
-    <div class="col-md-8 content-main">
+    <div class="col-md-10 ">
         <div class="content-grid">
             <div class="content-grid-info">
                 <img src="{{ asset('bloglte/images/post1.jpg') }}" alt=""/>

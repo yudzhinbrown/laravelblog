@@ -1,5 +1,7 @@
 <!----webfonts---->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{{asset('adminlte/vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('adminlte/vendor/popper.js/umd/popper.min.js')}}"> </script>
+
 <!--end slider -->
 <!--script-->
 <script type="text/javascript" src="{{ asset('bloglte/js/move-top.js') }}"></script>
@@ -14,3 +16,7 @@
     });
 </script>
 <!---->
+<script src="{{asset('adminlte/js/slug.js')}}"></script>
+<script src="{{asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+@yield('ckeditor')

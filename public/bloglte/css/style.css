@@ -451,7 +451,7 @@ margin: 10px 0;
 height: 200px;
 resize: none;
 }
-.content-form form input[type="submit"] {
+.content-form form input[type="submit"], .card-header a {
 color: #fff;
 background: #00aeff;
 padding: 0.4em 1.5em;
@@ -468,7 +468,7 @@ transition: 0.5s all ease;
 -o-transition: 0.5s all ease;
 -ms-transition: 0.5s all ease;
 }
-.content-form form input[type="submit"]:hover{
+.content-form form input[type="submit"]:hover, .card-header a:hover{
 background: transparent;
 color:#00aeff;
 }
@@ -909,4 +909,55 @@ font-size: 1.1em;
 
 .line{
   border-top: 1px solid #d2d2d2 ;
+  clear: both;
 }
+
+.tag{
+  margin: 0 5px;
+  background-color: #00aeff;
+  padding: 2px;
+  color: #fff0ff
+}
+
+.tag > a, .tag a:hover  {
+  color: #fff;
+  padding: 2px;
+}
+
+.tag a:hover  {
+  color:  #4a5054;
+}
+
+.content-form{
+  margin-bottom: 20px;
+}
+
+.content-form label{
+  padding: 12px;
+  color: #00aeff;
+  font-size: 20px;
+}
+
+.select-box{
+  margin-top: 7px;
+}
+
+/*table*/
+.float-left {
+  float: left!important;
+}
+
+.float-right {
+  float: right!important;
+}
+
+.card-header h2{
+  padding-top: 7px;
+}
+
+#slug-btn{
+  margin-top: 15px ;
+}
+
+
+/*table*/

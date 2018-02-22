@@ -16,6 +16,16 @@ class Post extends Model
     }
 
 
+    public function category(){
+        return $this->belongsTo('App\Category')->first();
+    }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
+
+
     //Get format date
     public function getDate()
     {

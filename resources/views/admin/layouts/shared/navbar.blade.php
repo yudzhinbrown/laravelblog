@@ -8,6 +8,7 @@
                 <li><a href="{{ route('admin.tag.index') }}"> <i class="fa fa-tag"></i>Tэги</a></li>
                 <li><a href="{{ route('admin.post.index') }}"> <i class="fa fa-file"></i>Посты</a></li>
                 <li><a href="{{ route('admin.comment.index') }}"><i class="fa fa-comment"></i>Комментарии</a></li>
+                <li><a href="{{ route('admin.user.index') }}"><i class="fa fa-users"></i>Пользователи</a></li>
             </ul>
         </div>
     </div>
