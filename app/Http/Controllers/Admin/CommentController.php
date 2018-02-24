@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Post;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,7 +18,8 @@ class CommentController extends Controller
     {
 
       return view('admin.comments.index', [
-          'comments' => Comment::paginate(10)
+          'comments' => Comment::paginate(10),
+          'posts' => Post::where('published', true)->get()
       ]);
 
     }

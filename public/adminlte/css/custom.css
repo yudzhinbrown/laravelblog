@@ -1,1 +1,12 @@
 /* your styles go here */
+
+.filter-wrap{
+    padding: 10px ;
+    margin-bottom: -40px;
+}
+
+.form-control-filter{
+    padding-top: 10px;
+    padding-left: 30px;
+}
+

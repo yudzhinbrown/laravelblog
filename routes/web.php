@@ -27,12 +27,11 @@ Route::group(['namespace' => 'Blog'], function (){
     Route::group(['middleware' => 'auth'], function (){
         Route::resource('/comment', 'CommentController');
         Route::resource('/my_post', 'MyPostController');
+        Route::get('/settings', 'SettingController@index')->name('show_settings');
+        Route::post('/settings/edit/password', 'SettingController@editPassword' )->name('edit_password');
+        Route::post('/settings/edit/email', 'SettingController@editEmail' )->name('edit_email');
     });
-
-
 });
-
-
 
 
 //admin-panel
@@ -44,6 +43,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::resource('/post', 'PostController', ['as' => 'admin']);
     Route::resource('/comment', 'CommentController', ['as' => 'admin']);
     Route::resource('/user', 'UserController', ['as' => 'admin']);
+    Route::post('/comment/filter', 'FilterController@commentFilter')->name('comment_filter');
+    Route::post('/post/filter', 'FilterController@postFilter')->name('post_filter');
 });
 
 

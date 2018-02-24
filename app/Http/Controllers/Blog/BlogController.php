@@ -11,7 +11,9 @@ use App\Category;
 class BlogController extends Controller
 {
     public function index(){
-        return view('blog.index');
+        return view('blog.index',[
+            'posts' => Post::limit(5)->where('published', true)->orderBy('created_at', 'desk')->get(),
+        ]);
     }
 
     public function category($slug){

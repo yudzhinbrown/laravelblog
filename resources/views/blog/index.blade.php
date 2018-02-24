@@ -1,34 +1,20 @@
 @extends('blog.layouts.app_blog')
 
+@section('title', 'Главная')
 @section('content')
     <div class="col-md-10 ">
         <div class="content-grid">
-            <div class="content-grid-info">
-                <img src="{{ asset('bloglte/images/post1.jpg') }}" alt=""/>
-                <div class="post-info">
-                    <h4><a href="single.html">Lorem ipsum dolor sit amet</a>  July 30, 2014 / 27 Comments</h4>
-                    <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis.</p>
-                    <a href="single.html"><span></span>READ MORE</a>
+            @forelse($posts as $post)
+                <div class="content-grid-info">
+                    <div class="post-info">
+                        <h4><a href="{{ route('post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>  {{ $post->getDate() }}</h4>
+                        <p>{!! $post->description_short !!}</p>
+                        <a href="{{ route('post', [$post->category->slug, $post->slug]) }}"><span></span>Прочитайте больше</a>
+                    </div>
                 </div>
-            </div>
-            <div class="content-grid-info">
-                <img src="{{ asset('bloglte/images/post2.jpg') }}" alt=""/>
-                <div class="post-info">
-                    <h4><a href="single.html">Lorem ipsum dolor sit amet</a>  July 30, 2014 / 27 Comments</h4>
-                    <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis.</p>
-                    <a href="single.html"><span></span>READ MORE</a>
-                </div>
-            </div>
-            <div class="content-grid-info">
-                <img src="{{ asset('bloglte/images/post3.jpg') }}" alt=""/>
-                <div class="post-info">
-                    <h4><a href="single.html">Lorem ipsum dolor sit amet</a>  July 30, 2014 / 27 Comments</h4>
-                    <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis.</p>
-                    <a href="single.html"><span></span>READ MORE</a>
-                </div>
-            </div>
-
+            @empty
+                <h2>Опубликованных записей нет</h2>
+            @endforelse
         </div>
     </div>
 @endsection
-

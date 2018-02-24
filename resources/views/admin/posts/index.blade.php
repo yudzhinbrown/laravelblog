@@ -9,6 +9,31 @@
                         <h2 class="float-left">Посты</h2>
                         <a class="btn btn-primary float-right" href="{{ route('admin.post.create') }}">Добавить</a>
                     </div>
+                    <div class="filter-wrap">
+                        <form action="{{ route('post_filter') }}" method="post">
+                            @csrf
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label form-control-filter">Название категории:</label>
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <select class="form-control" name="category">
+                                                @forelse($categories as $category)
+                                                    <option value="{{$category->id }}">{{ $category->title }}</option>
+                                                @empty
+                                                    <h2>Таблица с категориями пуста</h2>
+                                                @endforelse
+                                            </select>
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-primary">Отправить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">

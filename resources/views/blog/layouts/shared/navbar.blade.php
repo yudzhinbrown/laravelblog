@@ -20,8 +20,10 @@
             <ul>
                 <li><a href="{{ route('my_post.index') }}">Мои Посты</a></li>
                 <li><a href="{{ route('comment.index') }}">Мои комментарии</a></li>
+                <li><a href="{{ route('show_settings') }}">Настройки аккаунта</a></li>
                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Выйти</a></li>
+
             </ul>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
